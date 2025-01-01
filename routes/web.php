@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    return view('welcome');
-});
+require_once __DIR__ . '/web/view.php';
+require_once __DIR__ . '/web/auth.php';
+require_once __DIR__ . '/web/link.php';
