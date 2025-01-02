@@ -5,14 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreLinkRequest;
 use App\Http\Requests\UpdateLinkRequest;
-use App\Http\Resources\LinkApiResource;
 use App\Models\Link;
-
-use Illuminate\Support\Facades\Gate;
 
 class LinkApiController extends Controller
 {
-
     public function update(UpdateLinkRequest $request, Link $link)
     {
         $link->url = $request->input('url');

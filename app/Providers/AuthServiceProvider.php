@@ -2,16 +2,14 @@
 
 namespace App\Providers;
 
+use App\Models\Link;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Gate;
-use App\Models\Link;
+use Illuminate\Support\Facades\Session;
 
 class AuthServiceProvider extends ServiceProvider
 {
-
     public function boot()
     {
         Gate::define(
@@ -22,4 +20,3 @@ class AuthServiceProvider extends ServiceProvider
         );
     }
 }
-

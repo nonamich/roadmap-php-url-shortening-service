@@ -3,7 +3,6 @@
 use App\Http\Controllers\Api\LinkApiController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::put('/', function () {
     return response()->json(['fine']);
 });
