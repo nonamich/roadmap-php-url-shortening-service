@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class Link extends Model
@@ -42,22 +41,35 @@ class Link extends Model
 
     public function scopeWhereOwner(Builder $query): void
     {
-        $query->where('user_id', '=', Auth::id())
-            ->orWhere('session_id', '=', session()->id());
+        if (auth()->check()) {
+            $query->where('user_id', auth()->id());
+        } else {
+            $query->where('session_id', session()->id());
+        }
+
     }
 
     protected static function boot()
     {
         parent::boot();
 
-        static::creating(function (Link $link) {
+        static::creating(function (self $link) {
             $link->code = static::generateCode();
 
-            if (Auth::check()) {
-                $link->user_id = Auth::id();
+            if (auth()->check()) {
+                $link->user_id = auth()->id();
             } else {
                 $link->session_id = session()->id();
             }
         });
+    }
+
+    public function isOwner()
+    {
+        if (auth()->check()) {
+            return auth()->id() === $this->user_id;
+        }
+
+        return session()->id() === $this->session_id;
     }
 }
