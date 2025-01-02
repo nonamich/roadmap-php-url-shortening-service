@@ -27,7 +27,7 @@
                     {{ $link->access_count }}</td>
                 </td>
                 <td class="text-wrap px-3 py-4 text-sm text-gray-800 dark:text-neutral-200">
-                    <a target="_blank" class="text-blue-600" href="{{ $link->link }}">{{ $link->link }}</a>
+                    <a target="_blank" class="text-blue-600" href="{{ $link->url }}">{{ $link->url }}</a>
                 </td>
                 <td class="text-wrap px-3 py-4 text-end text-sm font-medium">
                     <a href="/{{ $link->code }}/edit"

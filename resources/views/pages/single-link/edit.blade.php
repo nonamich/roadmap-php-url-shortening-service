@@ -9,7 +9,7 @@
             <div class="sm:col-span-4">
                 <label class="block text-sm/6 font-medium text-gray-300">
                     <span>Redirect To</span>
-                    <input type="url" name="link" autocomplete="family-name" value="{{ $link->link }}"
+                    <input type="url" name="url" autocomplete="family-name" value="{{ $link->url }}"
                         class="block w-full rounded-md bg-slate-700 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-gray-800 placeholder:text-white focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
                 </label>
             </div>

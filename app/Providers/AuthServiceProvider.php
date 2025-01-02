@@ -4,10 +4,10 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Link;
-use App\Models\User;
 
 class AuthServiceProvider extends ServiceProvider
 {

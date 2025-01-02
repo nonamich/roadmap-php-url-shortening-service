@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->timestamps();
             $table->string('code')->unique();
-            $table->string('link');
+            $table->string('url');
             $table->unsignedInteger('access_count')->default(0)->index();
             $table->string('session_id')->nullable()->index();
 

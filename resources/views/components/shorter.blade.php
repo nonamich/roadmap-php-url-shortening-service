@@ -4,7 +4,7 @@
     <form action="/" method="POST">
         @csrf
         <div class="mb-4 mt-4">
-            <input type="url" name="link"
+            <input type="url" name="url"
                 class="text-md w-full rounded-lg border border-neutral-700 px-4 py-3 focus:border-blue-500 focus:outline-none dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-400 dark:placeholder-neutral-500"
                 placeholder="https://example.com" required>
         </div>

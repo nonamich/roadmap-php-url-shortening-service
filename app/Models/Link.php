@@ -12,12 +12,12 @@ class Link extends Model
     protected const LENGTH_CODE = 6;
 
     protected $fillable = [
-        'link',
+        'url',
         'access_count',
     ];
 
     protected $guarded = [
-        'link',
+        'url',
         'code',
     ];
 

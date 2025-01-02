@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreLinkRequest;
+use App\Http\Requests\UpdateLinkRequest;
 use App\Models\Link;
 use Illuminate\Http\Request;
 
@@ -10,17 +12,12 @@ use Illuminate\Support\Facades\Gate;
 
 class LinkController extends Controller
 {
-    public const LINK_RULES = [
-        'link' => ['required', 'string', 'url:http,https', 'active_url'],
-    ];
 
-    public function update(Request $request, Link $link)
+    public function update(UpdateLinkRequest $request, Link $link)
     {
         Gate::authorize('only-link-owner', $link);
 
-        $request->validate(static::LINK_RULES);
-
-        $link->link = $request->input('link');
+        $link->url = $request->input('url');
 
         $link->saveOrFail();
 
@@ -30,12 +27,10 @@ class LinkController extends Controller
         ;
     }
 
-    public function create(Request $request)
+    public function create(StoreLinkRequest $request)
     {
-        $request->validate(static::LINK_RULES);
-
         $link = Link::create([
-            'link' => $request->input('link'),
+            'url' => $request->input('url'),
         ]);
 
         $link->refresh();
@@ -65,7 +60,7 @@ class LinkController extends Controller
     {
         $link->incrementCount();
 
-        return redirect($link->link);
+        return redirect($link->url);
     }
 
     public function edit(Link $link)

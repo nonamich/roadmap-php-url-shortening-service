@@ -28,8 +28,6 @@
                     <label for="remember" class="text-gray-500 dark:text-gray-300">Remember me</label>
                 </div>
             </div>
-            <a href="#" class="text-primary-600 dark:text-primary-500 text-sm font-medium hover:underline">Forgot
-                password?</a>
         </div>
         @if ($errors->any())
             <div class="mt-1 text-xs font-semibold text-red-500">
