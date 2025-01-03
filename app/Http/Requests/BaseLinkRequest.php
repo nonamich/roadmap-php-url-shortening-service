@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\NotContainsAppUrl;
 use Illuminate\Foundation\Http\FormRequest;
 
 abstract class BaseLinkRequest extends FormRequest
@@ -14,7 +15,13 @@ abstract class BaseLinkRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'url' => ['required', 'string', 'url:http,https', 'active_url'],
+            'url' => [
+                'required',
+                'string',
+                'url:http,https',
+                'active_url',
+                new NotContainsAppUrl,
+            ],
         ];
     }
 }

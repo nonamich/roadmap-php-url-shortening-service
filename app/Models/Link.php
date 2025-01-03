@@ -22,7 +22,7 @@ class Link extends Model
 
     protected $appends = ['redirect_from'];
 
-    protected $hidden = ['user_id', 'session_id'];
+    protected $hidden = ['user_id', 'session_id', 'redirect_from'];
 
     public function getRedirectFromAttribute(): string
     {
@@ -31,7 +31,14 @@ class Link extends Model
 
     public static function generateCode()
     {
-        return Str::random(static::LENGTH_CODE);
+        $code = Str::random(static::LENGTH_CODE);
+        $isExists = static::where('code', $code)->exists();
+
+        if ($isExists) {
+            return static::generateCode();
+        }
+
+        return $code;
     }
 
     public function incrementCount()
@@ -46,7 +53,6 @@ class Link extends Model
         } else {
             $query->where('session_id', session()->id());
         }
-
     }
 
     protected static function boot()
