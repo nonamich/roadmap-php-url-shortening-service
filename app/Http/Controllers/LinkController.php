@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreLinkRequest;
-use App\Http\Requests\UpdateLinkRequest;
+use App\Http\Requests\Link\DestroyLinkRequest;
+use App\Http\Requests\Link\StoreLinkRequest;
+use App\Http\Requests\Link\UpdateLinkRequest;
 use App\Models\Link;
 
 class LinkController extends Controller
@@ -38,9 +39,16 @@ class LinkController extends Controller
     {
         $this->authorize('view', $link);
 
-        $link->incrementCount();
+        return $this->response(
+            function () use ($link) {
+                $link->incrementCount();
 
-        return redirect()->to($link->url);
+                return redirect()->to($link->url);
+            },
+            function () use ($link) {
+                return response()->json($link);
+            }
+        );
     }
 
     public function edit(Link $link)
@@ -54,8 +62,6 @@ class LinkController extends Controller
 
     public function update(UpdateLinkRequest $request, Link $link)
     {
-        $this->authorize('update', $link);
-
         $link->url = $request->input('url');
 
         $link->saveOrFail();
@@ -71,10 +77,8 @@ class LinkController extends Controller
 
     }
 
-    public function destroy(Link $link)
+    public function destroy(DestroyLinkRequest $request, Link $link)
     {
-        $this->authorize('delete', $link);
-
         $link->forceDelete();
 
         return $this->response(function () {

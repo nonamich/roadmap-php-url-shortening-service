@@ -1,15 +1,14 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::get('/login', fn () => view('pages.login'))->name('login');
-    Route::get('/register', [RegisterController::class, 'create'])->name('register');
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::get('/register', [AuthController::class, 'create'])->name('register');
 
-    Route::post('/login', [LoginController::class, 'authenticate']);
-    Route::post('/register', [RegisterController::class, 'store']);
+    Route::post('/login', [AuthController::class, 'authenticate']);
+    Route::post('/register', [AuthController::class, 'store']);
 });
 
-Route::get('/logout', [RegisterController::class, 'logout']);
+Route::get('/logout', [AuthController::class, 'logout']);

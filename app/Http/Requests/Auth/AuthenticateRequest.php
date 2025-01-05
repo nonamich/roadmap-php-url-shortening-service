@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Auth;
 
-use App\Rules\NotContainsAppUrl;
 use Illuminate\Foundation\Http\FormRequest;
 
-abstract class BaseLinkRequest extends FormRequest
+class AuthenticateRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -15,13 +14,8 @@ abstract class BaseLinkRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'url' => [
-                'required',
-                'string',
-                'url:http,https',
-                'active_url',
-                new NotContainsAppUrl,
-            ],
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ];
     }
 }
