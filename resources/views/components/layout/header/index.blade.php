@@ -1,4 +1,4 @@
-<header class="mx-auto max-w-screen-md rounded-3xl bg-zinc-900 text-gray-50 mb-4 py-3 px-3.5">
+<header class="mx-auto max-w-screen-lg rounded-3xl bg-zinc-900 text-gray-50 mb-4 py-3 px-3.5">
     <div class="flex justify-between">
         <div>
             <a href="/">

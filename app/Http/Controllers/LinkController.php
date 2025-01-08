@@ -6,12 +6,21 @@ use App\Http\Requests\Link\DestroyLinkRequest;
 use App\Http\Requests\Link\StoreLinkRequest;
 use App\Http\Requests\Link\UpdateLinkRequest;
 use App\Models\Link;
+use Illuminate\Http\Request;
 
 class LinkController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $links = Link::whereOwner()->get();
+        $query = Link::query();
+
+        if ($request->has('sort') && $request->has('direction')) {
+            $query->orderBy($request->get('sort'), $request->get('direction'));
+        } else {
+            $query->orderBy('created_at', 'desc');
+        }
+
+        $links = $query->paginate(10)->withQueryString();
 
         return view('pages.links')->with([
             'links' => $links,
@@ -20,8 +29,6 @@ class LinkController extends Controller
 
     public function store(StoreLinkRequest $request)
     {
-        $this->authorize('create', Link::class);
-
         $link = Link::create([
             'url' => $request->input('url'),
         ]);

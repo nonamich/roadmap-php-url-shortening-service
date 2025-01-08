@@ -18,7 +18,7 @@
 
     <body class="bg-zinc-700 p-4 text-gray-50">
         <x-layout.header />
-        <main class="mx-auto max-w-screen-md rounded-2xl bg-zinc-900 px-5 py-6">
+        <main class="mx-auto max-w-screen-lg rounded-2xl bg-zinc-900 px-5 py-6">
             {{ $slot }}
         </main>
     </body>

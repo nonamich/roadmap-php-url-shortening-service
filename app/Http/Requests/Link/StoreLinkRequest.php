@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Link;
 
+use App\Models\Link;
 use Illuminate\Support\Facades\Gate;
 
 class StoreLinkRequest extends BaseLinkRequest
@@ -11,8 +12,6 @@ class StoreLinkRequest extends BaseLinkRequest
      */
     public function authorize(): bool
     {
-        $link = $this->route('link');
-
-        return Gate::allows('create', $link);
+        return Gate::allows('create', Link::class);
     }
 }

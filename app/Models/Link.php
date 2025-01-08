@@ -3,11 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 
 class Link extends Model
 {
+    use HasFactory;
+
     protected const LENGTH_CODE = 6;
 
     protected $fillable = [
@@ -77,5 +81,10 @@ class Link extends Model
         }
 
         return session()->id() === $this->session_id;
+    }
+
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
